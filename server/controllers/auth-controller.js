@@ -12,10 +12,11 @@ const home = async (req, res) =>{ // Whenever we use async function we have to f
 
 const register = async(req, res) => {
     try{
-        res.status(200).send("Welcome to the Register page");
+        console.log(req.body); // to see the data coming from the client side
+        res.status(200).json( {message: req.body} ); // sending the data back to the client side in json format
     }
     catch(error){
-        res.status(500).send("Internal Server Error");
+        res.status(500).json("Internal Server Error");
     }
 }
 
