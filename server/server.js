@@ -1,5 +1,6 @@
 // root file for server
 
+require('dotenv').config(); // to use the .env file we need to require it and call the config method
 // if you want to work in express you need to get express
 const express = require('express'); // i want to use express and the power of express is store in the variable express
 const app = express(); // calling express function with empty arguments and storing the result in app variable ( with this app varibale you can do many thing create server, create routes middleware etc)
