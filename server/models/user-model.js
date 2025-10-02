@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // create a schema
 const userSchema = new mongoose.Schema({
@@ -50,9 +51,32 @@ userSchema.pre("save", async function(next){ // pre means before saving the data
         next(error); // if there is an error then move to the next middleware with the error
     }
 
+});
 
 
-})
+// json web token
+userSchema.methods.generateToken = async function() {
+    try{
+        return jwt.sign({
+           // payload
+           userId: this._id.toString(),
+           email: this.email,
+           isAdmin: this.isAdmin
+        },
+        // pass the signature
+        process.env.JWT_SECRET_KEY,
+
+        {
+            // this is optional
+            expiresIn: "30d"
+        }
+        );
+
+    }catch(error){
+        console.log("Error while generating the token", error);
+    }
+}
+
 
 // define the model or the collection name 
 const User = new mongoose.model("User", userSchema); // first argument is the collection name second is the schema name

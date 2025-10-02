@@ -26,16 +26,21 @@ const register = async (req, res) => {
       return res.status(400).json("User already exists with this email");
     }
 
-
     // 3. if user does not exist then create a new user
     const userCreated = await User.create({
       username,
       email,
       phone,
-      password
+      password,
     }); // creating a new user in the database
 
-    res.status(201).json({ data: userCreated }); // sending the data back to the client side in json format
+    res
+      .status(201)
+      .json({
+        msg: "Reistration successful",
+        token: await userCreated.generateToken(),
+        userId: userCreated.id.toString(),
+      }); // sending the data back to the client side in json format
   } catch (error) {
     console.log(error);
     res.status(500).json("Internal Server Error");
