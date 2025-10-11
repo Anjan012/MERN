@@ -9,5 +9,7 @@ router.route("/").get(authcontrollers.home); // whenever we hit this route it wi
 
 router.route("/register").post(authcontrollers.register);
 
+router.route("/login").post(authcontrollers.login);
+
 // note: Whenever you create a new route file you need to export it and import it in the server.js file
 module.exports = router;
