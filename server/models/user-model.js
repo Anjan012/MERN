@@ -53,6 +53,11 @@ userSchema.pre("save", async function(next){ // pre means before saving the data
 
 });
 
+// compare the password
+userSchema.methods.comparePassword = async function name(password) {
+    return bcrypt.compare(password, this.password);
+};
+
 
 // json web token
 userSchema.methods.generateToken = async function() {
