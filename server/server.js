@@ -6,6 +6,7 @@ const express = require('express'); // i want to use express and the power of ex
 const app = express(); // calling express function with empty arguments and storing the result in app variable ( with this app varibale you can do many thing create server, create routes middleware etc)
 const router = require('./router/auth-router');
 const connectdb = require('./utils/db');
+const errorMidlleware = require('./middlewares/error-middleware');
 
 app.use(express.json()); // means now you can use json data in your application
 
@@ -14,6 +15,8 @@ app.use("/api/auth", router); // first argument is the route second is the route
 // app.get("/", (req, res)=>{
 //     res.status(200).send("hello from the server side");
 // }); // first argument is route (default home page ) second is callback function
+
+app.use(errorMidlleware); // if error comes no connection at all
 
 // to get the response from the server we need to make the server listen 
 const PORT = 5000; // port number

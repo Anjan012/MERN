@@ -42,8 +42,9 @@ const register = async (req, res) => {
         userId: userCreated.id.toString(),
       }); // sending the data back to the client side in json format
   } catch (error) {
-    console.log(error);
-    res.status(500).json("Internal Server Error");
+    // console.log(error);
+    // res.status(500).json("Internal Server Error");
+    next(error);
   }
 };
 
