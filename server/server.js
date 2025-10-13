@@ -4,13 +4,15 @@ require('dotenv').config(); // to use the .env file we need to require it and ca
 // if you want to work in express you need to get express
 const express = require('express'); // i want to use express and the power of express is store in the variable express
 const app = express(); // calling express function with empty arguments and storing the result in app variable ( with this app varibale you can do many thing create server, create routes middleware etc)
-const router = require('./router/auth-router');
+const authRoute = require('./router/auth-router');
+const contactRoute = require('./router/contact-router');
 const connectdb = require('./utils/db');
 const errorMidlleware = require('./middlewares/error-middleware');
 
 app.use(express.json()); // means now you can use json data in your application
 
-app.use("/api/auth", router); // first argument is the route second is the router variable
+app.use("/api/auth", authRoute); // first argument is the route second is the router variable
+app.use("/api/form", contactRoute)
 
 // app.get("/", (req, res)=>{
 //     res.status(200).send("hello from the server side");
