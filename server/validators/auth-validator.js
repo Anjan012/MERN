@@ -45,4 +45,25 @@ const loginSchema = z.object({
 
 });
 
-module.exports = { signupSchema, loginSchema };
+const contactSchema = z.object({
+    username: z.
+    string({ require_error: "Username is required" })
+    .trim()
+    .min(3, {message: "Name must be atleast 3 character"})
+    .max(255, {message: "Name shouldn't exceed 255 character"}),
+
+    email: z.
+    string({require_error: "Email is required"})
+    .trim()
+    .email({message: "Invalid email address"})
+    .min(3, {message: "Email must be at least 3 characters"})
+    .max(255, {message: "Email must not be more than 255 characters"}), 
+
+    message: z.
+    string({message: "message is required"})
+    .trim()
+    .min(20, {message: "message length must be atleast 20 character"})
+    .max(1024, {message: "message shouldn't exceed 1024 character"})
+});
+
+module.exports = { signupSchema, loginSchema, contactSchema };
