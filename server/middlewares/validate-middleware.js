@@ -9,7 +9,7 @@ const validate = (schema) => async(req, res, next) => { // the schema is the sig
 
         
     } catch (err) {
-        const message =err.errors[0].message;
+        const message =err.issues[0].message;
         console.log(message);
         res.status(400).json({msg: message});
     }
