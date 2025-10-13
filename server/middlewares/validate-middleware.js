@@ -12,7 +12,7 @@ const validate = (schema) => async(req, res, next) => { // the schema is the sig
         const status = 422;
         const message = 'fill the input properly';
         const extraDetails = err.issues[0].message;
-        console.log(message);
+        console.log(extraDetails);
         // res.status(400).json({msg: message});
 
         const error = {

@@ -12,7 +12,7 @@ const home = async (req, res) => {
   }
 };
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   try {
     console.log(req.body); // to see the data coming from the client side
 
@@ -52,7 +52,7 @@ const register = async (req, res) => {
 // User login logic
 // * ------------------
 
-const login = async (req, res) =>{
+const login = async (req, res, next) =>{
 
   try {
 
@@ -84,7 +84,8 @@ const login = async (req, res) =>{
     }
     
   } catch (error) {
-    res.status(500).json("Internal Server Error");
+    // res.status(500).json("Internal Server Error");
+    next(error);
 
   }
 }
