@@ -1,0 +1,12 @@
+footer{
+    margin-top: 10px ;
+}
+
+.footer-text{
+    width: 100%;
+    padding:10px 0;
+    background-color: #646cff;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+}
