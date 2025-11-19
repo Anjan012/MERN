@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
 
@@ -9,6 +10,7 @@ export const Register = () => {
         password: ""
     });
 
+    const navigate = useNavigate();
     // handling the input values
     const handleInput = (e) => {
         console.log(e);
@@ -19,13 +21,40 @@ export const Register = () => {
             ...user,
             [name]: value
         });
-        
+
     };
 
     // handling form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert(user);
+
+        try {
+
+            const response = await fetch("http://localhost:5000/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            });
+
+            if (response.ok) {
+                setUser({
+                    username: "",
+                    email: "",
+                    phone: "",
+                    password: ""
+                });
+                navigate("/login");
+            }
+
+            console.log(response);
+
+        } catch (error) {
+            console.log("Registration: ", error);
+
+        }
+
     }
 
 
@@ -50,52 +79,52 @@ export const Register = () => {
                                 <form onSubmit={handleSubmit}>
                                     <div>
                                         <label htmlFor="username">username</label>
-                                        <input 
-                                            type="text" 
-                                            name="username" 
-                                            placeholder="username" 
-                                            id="username" 
-                                            required 
-                                            autoComplete="off" 
+                                        <input
+                                            type="text"
+                                            name="username"
+                                            placeholder="username"
+                                            id="username"
+                                            required
+                                            autoComplete="off"
                                             value={user.username}
                                             onChange={handleInput}
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="email">email</label>
-                                        <input 
-                                            type="email" 
-                                            name="email" 
-                                            placeholder="enter your email" 
-                                            id="email" 
-                                            required 
-                                            autoComplete="off" 
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            placeholder="enter your email"
+                                            id="email"
+                                            required
+                                            autoComplete="off"
                                             value={user.email}
                                             onChange={handleInput}
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="phone">phone</label>
-                                        <input 
-                                            type="number" 
-                                            name="phone" 
-                                            placeholder="enter your phone number" 
-                                            id="phone" 
-                                            required 
-                                            autoComplete="off" 
+                                        <input
+                                            type="number"
+                                            name="phone"
+                                            placeholder="enter your phone number"
+                                            id="phone"
+                                            required
+                                            autoComplete="off"
                                             value={user.phone}
                                             onChange={handleInput}
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="password">password</label>
-                                        <input 
-                                            type="password" 
-                                            name="password" 
-                                            placeholder="enter your password" 
-                                            id="password" 
-                                            required 
-                                            autoComplete="off" 
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            placeholder="enter your password"
+                                            id="password"
+                                            required
+                                            autoComplete="off"
                                             value={user.password}
                                             onChange={handleInput}
                                         />

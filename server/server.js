@@ -8,7 +8,15 @@ const authRoute = require('./router/auth-router');
 const contactRoute = require('./router/contact-router');
 const connectdb = require('./utils/db');
 const errorMidlleware = require('./middlewares/error-middleware');
+const cors = require('cors');
 
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    methods: "GET, POST, PUT, DELETE, PATCH",
+    credentials: true,
+}
+
+app.use(cors(corsOptions)); // to avoid cors error
 app.use(express.json()); // means now you can use json data in your application
 
 app.use("/api/auth", authRoute); // first argument is the route second is the router variable
